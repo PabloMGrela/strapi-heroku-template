@@ -29,6 +29,12 @@
     },
     "menus": {
       "type": "json"
+    },
+    "address": {
+      "type": "string"
+    },
+    "phone": {
+      "type": "integer"
     }
   }
 }
