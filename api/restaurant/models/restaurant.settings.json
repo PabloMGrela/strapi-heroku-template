@@ -21,8 +21,14 @@
     "rating": {
       "type": "float"
     },
+    "logo": {
+      "type": "string"
+    },
+    "image": {
+      "type": "string"
+    },
     "menus": {
-      "collection": "menu"
+      "type": "json"
     }
   }
 }
