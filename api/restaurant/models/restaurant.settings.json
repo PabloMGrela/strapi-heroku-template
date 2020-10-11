@@ -15,7 +15,7 @@
     "latitude": {
       "type": "float"
     },
-    "logintude": {
+    "longitude": {
       "type": "float"
     },
     "rating": {
