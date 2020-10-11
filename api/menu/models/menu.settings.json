@@ -1,0 +1,19 @@
+{
+  "kind": "collectionType",
+  "collectionName": "menus",
+  "info": {
+    "name": "menu"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "price": {
+      "type": "decimal"
+    },
+    "sections": {
+      "collection": "section"
+    }
+  }
+}

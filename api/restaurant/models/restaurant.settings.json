@@ -20,6 +20,9 @@
     },
     "rating": {
       "type": "float"
+    },
+    "menus": {
+      "collection": "menu"
     }
   }
 }
