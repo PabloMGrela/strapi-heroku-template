@@ -35,6 +35,12 @@
     },
     "phone": {
       "type": "string"
+    },
+    "users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "restaurants",
+      "dominant": true
     }
   }
 }
