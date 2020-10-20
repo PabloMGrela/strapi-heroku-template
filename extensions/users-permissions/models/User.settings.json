@@ -56,6 +56,9 @@
     "restaurants": {
       "via": "users",
       "collection": "restaurant"
+    },
+    "favorites": {
+      "collection": "restaurant"
     }
   }
 }

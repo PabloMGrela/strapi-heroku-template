@@ -27,9 +27,6 @@
     "image": {
       "type": "string"
     },
-    "menus": {
-      "type": "json"
-    },
     "address": {
       "type": "string"
     },
@@ -41,6 +38,13 @@
       "collection": "user",
       "via": "restaurants",
       "dominant": true
+    },
+    "menus": {
+      "collection": "menu",
+      "via": "restaurant"
+    },
+    "is_favorite": {
+      "type": "boolean"
     }
   }
 }

@@ -12,8 +12,8 @@
   },
   "devDependencies": {},
   "dependencies": {
-    "fs": "^0.0.1-security",
     "dotenv": "^8.2.0",
+    "fs": "^0.0.1-security",
     "knex": "<0.20.0",
     "pg": "^8.0.3",
     "sqlite3": "latest",
@@ -22,7 +22,9 @@
     "strapi-connector-bookshelf": "3.0.0",
     "strapi-plugin-content-manager": "3.0.0",
     "strapi-plugin-content-type-builder": "3.0.0",
+    "strapi-plugin-documentation": "3.0.0",
     "strapi-plugin-email": "3.0.0",
+    "strapi-plugin-graphql": "3.0.0",
     "strapi-plugin-upload": "3.0.0",
     "strapi-plugin-users-permissions": "3.0.0",
     "strapi-utils": "3.0.0"
