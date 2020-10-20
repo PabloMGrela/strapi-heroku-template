@@ -9,20 +9,54 @@ const { sanitizeEntity } = require('strapi-utils')
 
 module.exports = {
 	async findOne(ctx) {
-		let favorites //= getFavorites(ctx)
+		let favorites
+		let ownRestaurants
 		if (ctx.state.user) {
 			const provider = ctx.state.user.provider
 			const query = { provider };
         	query.email = ctx.state.user.email.toLowerCase();
       		const user = await strapi.query('user', 'users-permissions').findOne(query);
 			favorites = user.favorites
-		} else {
-			console.log("no user")
+			ownRestaurants = user.restaurants
 		}
 
     	const { id } = ctx.params;
-    	const entity = await strapi.services.restaurant.findOne({ id });
-		return mapRestaurant(entity, favorites);
+
+    	if (id == "my") {
+    		//console.log("My Restaurants: " + ownRestaurants.map(r => { return r.id }))
+			//return ownRestaurants.map(entity => { return mapRestaurant(entity, favorites) })
+			let entities = await strapi.services.restaurant.find(ctx.query)
+			let myRestaurants = []
+			let restaurantsFound = entities.map(entity => { return mapRestaurant(entity, favorites) })
+			if (restaurantsFound) {
+				restaurantsFound.forEach(restaurant => {
+					ownRestaurants.map(r => { return r.id }).forEach(id => {
+						if (restaurant.id == id) {
+							myRestaurants.push(restaurant)
+						}
+					});
+				});
+			}
+			return myRestaurants
+		} else if (id == "favorites") {
+			let entities = await strapi.services.restaurant.find(ctx.query)
+			let myRestaurants = []
+			let restaurantsFound = entities.map(entity => { return mapRestaurant(entity, favorites) })
+			if (restaurantsFound) {
+				restaurantsFound.forEach(restaurant => {
+					favorites.map(r => { return r.id }).forEach(id => {
+						if (restaurant.id == id) {
+							myRestaurants.push(restaurant)
+						}
+					});
+				});
+			}
+			return myRestaurants
+    	} else {
+    		//console.log("ID: " + id)
+    		const entity = await strapi.services.restaurant.findOne({ id });
+    		return mapRestaurant(entity, favorites);
+		}
   	},
 
 	async find(ctx) {
@@ -33,8 +67,6 @@ module.exports = {
         	query.email = ctx.state.user.email.toLowerCase();
       		const user = await strapi.query('user', 'users-permissions').findOne(query);
 			favorites = user.favorites
-		} else {
-			console.log("no user")
 		}
 
 		const params = ctx.params
@@ -60,17 +92,19 @@ function mapRestaurant(entity, favorites) {
 
 	// Remove expired menus
 	let newMenus = []
-	for (let i = 0; i < restaurant.menus.length; i++) {
-      	let menu = restaurant.menus[i]
+	if (restaurant.menus) {
+		for (let i = 0; i < restaurant.menus.length; i++) {
+      		let menu = restaurant.menus[i]
 
-      	var currentDate = new Date()
-		currentDate.setDate(currentDate.getDate())
-		currentDate.setHours(0,0,0,0)
+      		var currentDate = new Date()
+			currentDate.setDate(currentDate.getDate())
+			currentDate.setHours(0,0,0,0)
 
-		let menuDate = new Date(menu.date+'T00:00:00.000')
-		let days = Math.round((menuDate-currentDate)/(1000*60*60*24))
-		if (days >= 0) {
-			newMenus.push(menu)
+			let menuDate = new Date(menu.date+'T00:00:00.000')
+			let days = Math.round((menuDate-currentDate)/(1000*60*60*24))
+			if (days >= 0) {
+				newMenus.push(menu)
+			}
 		}
 	}
 	restaurant.menus = newMenus
