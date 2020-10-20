@@ -40,8 +40,8 @@
       "dominant": true
     },
     "menus": {
-      "collection": "menu",
-      "via": "restaurant"
+      "via": "restaurant",
+      "collection": "menu"
     },
     "is_favorite": {
       "type": "boolean"

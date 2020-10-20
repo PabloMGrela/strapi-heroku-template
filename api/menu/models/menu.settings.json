@@ -19,11 +19,20 @@
       "type": "date"
     },
     "restaurant": {
-      "via": "menus",
-      "model": "restaurant"
+      "model": "restaurant",
+      "via": "menus"
     },
     "sections": {
       "type": "json"
+    },
+    "is_bread_included": {
+      "type": "boolean"
+    },
+    "is_drink_included": {
+      "type": "boolean"
+    },
+    "is_desert_included": {
+      "type": "boolean"
     }
   }
 }

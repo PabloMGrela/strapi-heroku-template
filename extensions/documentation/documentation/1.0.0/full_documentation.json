@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/20/2020 10:13:30 AM"
+    "x-generation-date": "10/20/2020 2:37:25 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3293,6 +3293,15 @@
           },
           "sections": {
             "type": "object"
+          },
+          "is_bread_included": {
+            "type": "boolean"
+          },
+          "is_drink_included": {
+            "type": "boolean"
+          },
+          "is_desert_included": {
+            "type": "boolean"
           }
         }
       },
@@ -3312,6 +3321,15 @@
           },
           "sections": {
             "type": "object"
+          },
+          "is_bread_included": {
+            "type": "boolean"
+          },
+          "is_drink_included": {
+            "type": "boolean"
+          },
+          "is_desert_included": {
+            "type": "boolean"
           }
         }
       },
@@ -3419,6 +3437,15 @@
                 },
                 "sections": {
                   "type": "object"
+                },
+                "is_bread_included": {
+                  "type": "boolean"
+                },
+                "is_drink_included": {
+                  "type": "boolean"
+                },
+                "is_desert_included": {
+                  "type": "boolean"
                 }
               }
             }

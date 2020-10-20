@@ -582,6 +582,15 @@
           },
           "sections": {
             "type": "object"
+          },
+          "is_bread_included": {
+            "type": "boolean"
+          },
+          "is_drink_included": {
+            "type": "boolean"
+          },
+          "is_desert_included": {
+            "type": "boolean"
           }
         }
       },
@@ -601,6 +610,15 @@
           },
           "sections": {
             "type": "object"
+          },
+          "is_bread_included": {
+            "type": "boolean"
+          },
+          "is_drink_included": {
+            "type": "boolean"
+          },
+          "is_desert_included": {
+            "type": "boolean"
           }
         }
       }
