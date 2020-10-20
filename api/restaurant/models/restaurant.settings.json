@@ -10,13 +10,16 @@
   },
   "attributes": {
     "name": {
-      "type": "string"
+      "type": "string",
+      "required": true
     },
     "latitude": {
-      "type": "float"
+      "type": "float",
+      "required": true
     },
     "longitude": {
-      "type": "float"
+      "type": "float",
+      "required": true
     },
     "rating": {
       "type": "float"
@@ -33,18 +36,20 @@
     "phone": {
       "type": "string"
     },
-    "users": {
+    "menus": {
+      "via": "restaurant",
+      "collection": "menu"
+    },
+    "owners": {
       "plugin": "users-permissions",
       "collection": "user",
       "via": "restaurants",
       "dominant": true
     },
-    "menus": {
-      "via": "restaurant",
-      "collection": "menu"
-    },
-    "is_favorite": {
-      "type": "boolean"
+    "users": {
+      "plugin": "users-permissions",
+      "collection": "user",
+      "via": "favorites"
     }
   }
 }

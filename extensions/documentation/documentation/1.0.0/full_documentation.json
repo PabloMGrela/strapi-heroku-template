@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/20/2020 2:37:25 PM"
+    "x-generation-date": "10/20/2020 9:27:03 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3227,7 +3227,8 @@
     "schemas": {
       "Menu": {
         "required": [
-          "id"
+          "id",
+          "price"
         ],
         "properties": {
           "id": {
@@ -3244,7 +3245,10 @@
           },
           "restaurant": {
             "required": [
-              "id"
+              "id",
+              "name",
+              "latitude",
+              "longitude"
             ],
             "properties": {
               "id": {
@@ -3274,20 +3278,23 @@
               "phone": {
                 "type": "string"
               },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "menus": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
-              "is_favorite": {
-                "type": "boolean"
+              "owners": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -3306,6 +3313,9 @@
         }
       },
       "NewMenu": {
+        "required": [
+          "price"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -3335,7 +3345,10 @@
       },
       "Restaurant": {
         "required": [
-          "id"
+          "id",
+          "name",
+          "latitude",
+          "longitude"
         ],
         "properties": {
           "id": {
@@ -3364,6 +3377,95 @@
           },
           "phone": {
             "type": "string"
+          },
+          "menus": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "price"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "sections": {
+                  "type": "object"
+                },
+                "is_bread_included": {
+                  "type": "boolean"
+                },
+                "is_drink_included": {
+                  "type": "boolean"
+                },
+                "is_desert_included": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "username",
+                "email"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "restaurants": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "favorites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           },
           "users": {
             "type": "array",
@@ -3408,54 +3510,22 @@
                   }
                 },
                 "favorites": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
-          },
-          "menus": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "sections": {
-                  "type": "object"
-                },
-                "is_bread_included": {
-                  "type": "boolean"
-                },
-                "is_drink_included": {
-                  "type": "boolean"
-                },
-                "is_desert_included": {
-                  "type": "boolean"
-                }
-              }
-            }
-          },
-          "is_favorite": {
-            "type": "boolean"
           }
         }
       },
       "NewRestaurant": {
+        "required": [
+          "name",
+          "latitude",
+          "longitude"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -3481,20 +3551,23 @@
           "phone": {
             "type": "string"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "menus": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "is_favorite": {
-            "type": "boolean"
+          "owners": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },
@@ -3595,7 +3668,10 @@
                   }
                 },
                 "favorites": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
@@ -3696,7 +3772,10 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "name",
+                "latitude",
+                "longitude"
               ],
               "properties": {
                 "id": {
@@ -3726,11 +3805,63 @@
                 "phone": {
                   "type": "string"
                 },
+                "menus": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owners": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "users": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                }
+              }
+            }
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "latitude",
+                "longitude"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                },
+                "rating": {
+                  "type": "number"
+                },
+                "logo": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
                 },
                 "menus": {
                   "type": "array",
@@ -3738,58 +3869,18 @@
                     "type": "string"
                   }
                 },
-                "is_favorite": {
-                  "type": "boolean"
+                "owners": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
-              }
-            }
-          },
-          "favorites": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longitude": {
-                "type": "number"
-              },
-              "rating": {
-                "type": "number"
-              },
-              "logo": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "menus": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "is_favorite": {
-                "type": "boolean"
               }
             }
           }
@@ -3837,7 +3928,10 @@
             }
           },
           "favorites": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       },

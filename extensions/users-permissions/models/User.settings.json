@@ -54,11 +54,13 @@
       "configurable": false
     },
     "restaurants": {
-      "via": "users",
+      "via": "owners",
       "collection": "restaurant"
     },
     "favorites": {
-      "collection": "restaurant"
+      "via": "users",
+      "collection": "restaurant",
+      "dominant": true
     }
   }
 }

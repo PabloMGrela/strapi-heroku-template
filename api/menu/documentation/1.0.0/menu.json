@@ -516,7 +516,8 @@
     "schemas": {
       "Menu": {
         "required": [
-          "id"
+          "id",
+          "price"
         ],
         "properties": {
           "id": {
@@ -533,7 +534,10 @@
           },
           "restaurant": {
             "required": [
-              "id"
+              "id",
+              "name",
+              "latitude",
+              "longitude"
             ],
             "properties": {
               "id": {
@@ -563,20 +567,23 @@
               "phone": {
                 "type": "string"
               },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
               "menus": {
                 "type": "array",
                 "items": {
                   "type": "string"
                 }
               },
-              "is_favorite": {
-                "type": "boolean"
+              "owners": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "users": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
               }
             }
           },
@@ -595,6 +602,9 @@
         }
       },
       "NewMenu": {
+        "required": [
+          "price"
+        ],
         "properties": {
           "name": {
             "type": "string"

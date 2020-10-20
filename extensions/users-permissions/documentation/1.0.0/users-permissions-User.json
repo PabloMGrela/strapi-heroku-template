@@ -1249,7 +1249,10 @@
             "type": "array",
             "items": {
               "required": [
-                "id"
+                "id",
+                "name",
+                "latitude",
+                "longitude"
               ],
               "properties": {
                 "id": {
@@ -1279,11 +1282,63 @@
                 "phone": {
                   "type": "string"
                 },
+                "menus": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "owners": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
                 "users": {
                   "type": "array",
                   "items": {
                     "type": "string"
                   }
+                }
+              }
+            }
+          },
+          "favorites": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "name",
+                "latitude",
+                "longitude"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "latitude": {
+                  "type": "number"
+                },
+                "longitude": {
+                  "type": "number"
+                },
+                "rating": {
+                  "type": "number"
+                },
+                "logo": {
+                  "type": "string"
+                },
+                "image": {
+                  "type": "string"
+                },
+                "address": {
+                  "type": "string"
+                },
+                "phone": {
+                  "type": "string"
                 },
                 "menus": {
                   "type": "array",
@@ -1291,58 +1346,18 @@
                     "type": "string"
                   }
                 },
-                "is_favorite": {
-                  "type": "boolean"
+                "owners": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
-              }
-            }
-          },
-          "favorites": {
-            "required": [
-              "id"
-            ],
-            "properties": {
-              "id": {
-                "type": "string"
-              },
-              "name": {
-                "type": "string"
-              },
-              "latitude": {
-                "type": "number"
-              },
-              "longitude": {
-                "type": "number"
-              },
-              "rating": {
-                "type": "number"
-              },
-              "logo": {
-                "type": "string"
-              },
-              "image": {
-                "type": "string"
-              },
-              "address": {
-                "type": "string"
-              },
-              "phone": {
-                "type": "string"
-              },
-              "users": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "menus": {
-                "type": "array",
-                "items": {
-                  "type": "string"
-                }
-              },
-              "is_favorite": {
-                "type": "boolean"
               }
             }
           }
@@ -1390,7 +1405,10 @@
             }
           },
           "favorites": {
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }

@@ -6,83 +6,91 @@
  */
 
 const { sanitizeEntity } = require('strapi-utils')
+const geolib = require('geolib');
 
 module.exports = {
 	async findOne(ctx) {
-		let favorites
-		let ownRestaurants
-		if (ctx.state.user) {
-			const provider = ctx.state.user.provider
-			const query = { provider };
-        	query.email = ctx.state.user.email.toLowerCase();
-      		const user = await strapi.query('user', 'users-permissions').findOne(query);
-			favorites = user.favorites
-			ownRestaurants = user.restaurants
-		}
+
+		let userCoords
+      	if (ctx.query["coords"]) {
+      		let latitude = ctx.query["coords"].split(",", 2)[0]
+      		let longitude = ctx.query["coords"].split(",", 2)[1]
+      		userCoords = { latitude: latitude, longitude: longitude}
+			ctx.query["coords"] = null
+      		//return [userCoords]
+      	}
+
+      	let radioFilter
+      	if (ctx.query["radio"]) {
+			radioFilter = ctx.query["radio"]
+			ctx.query["radio"] = null
+      	}
 
     	const { id } = ctx.params;
 
     	if (id == "my") {
-    		//console.log("My Restaurants: " + ownRestaurants.map(r => { return r.id }))
-			//return ownRestaurants.map(entity => { return mapRestaurant(entity, favorites) })
-			let entities = await strapi.services.restaurant.find(ctx.query)
-			let myRestaurants = []
-			let restaurantsFound = entities.map(entity => { return mapRestaurant(entity, favorites) })
-			if (restaurantsFound) {
-				restaurantsFound.forEach(restaurant => {
-					ownRestaurants.map(r => { return r.id }).forEach(id => {
-						if (restaurant.id == id) {
-							myRestaurants.push(restaurant)
-						}
-					});
-				});
-			}
-			return myRestaurants
+
+    		if (ctx.state.user) {
+    			let entities = await strapi.services.restaurant.find({ owners: ctx.state.user.id });
+				let restaurants = entities.map(entity => { return mapRestaurant(entity, ctx.state.user, userCoords, radioFilter) })
+				return restaurants
+    		} else {
+    			return null
+    		}
+
 		} else if (id == "favorites") {
-			let entities = await strapi.services.restaurant.find(ctx.query)
-			let myRestaurants = []
-			let restaurantsFound = entities.map(entity => { return mapRestaurant(entity, favorites) })
-			if (restaurantsFound) {
-				restaurantsFound.forEach(restaurant => {
-					favorites.map(r => { return r.id }).forEach(id => {
-						if (restaurant.id == id) {
-							myRestaurants.push(restaurant)
-						}
-					});
-				});
+
+			if (ctx.state.user) {
+				//const user = await strapi.query('user', 'users-permissions').findOne({ email: ctx.state.user.email });
+				//let ids = user.favorites.map(favorite => { return favorite.id })
+				//let entities = await strapi.services.restaurant.find({ id: ids });
+				let entities = await strapi.services.restaurant.find({ users: ctx.state.user.id });
+				let restaurants = entities.map(entity => { return mapRestaurant(entity, ctx.state.user, userCoords, radioFilter) })
+				return restaurants
+			} else {
+				return null
 			}
-			return myRestaurants
+
     	} else {
-    		//console.log("ID: " + id)
+
     		const entity = await strapi.services.restaurant.findOne({ id });
-    		return mapRestaurant(entity, favorites);
+    		return mapRestaurant(entity, favorites, userCoords, radioFilter);
 		}
   	},
 
 	async find(ctx) {
-		let favorites //= getFavorites(ctx)
-		if (ctx.state.user) {
-			const provider = ctx.state.user.provider
-			const query = { provider };
-        	query.email = ctx.state.user.email.toLowerCase();
-      		const user = await strapi.query('user', 'users-permissions').findOne(query);
-			favorites = user.favorites
-		}
 
-		const params = ctx.params
-		//console.log("Params: " + params)
+		let userCoords
+      	if (ctx.query["coords"]) {
+      		let latitude = ctx.query["coords"].split(",", 2)[0]
+      		let longitude = ctx.query["coords"].split(",", 2)[1]
+      		userCoords = { latitude: latitude, longitude: longitude}
+			ctx.query["coords"] = null
+      		//return [userCoords]
+      	}
+
+		let radioFilter
+      	if (ctx.query["radio"]) {
+			radioFilter = ctx.query["radio"]
+			ctx.query["radio"] = null
+      	}
+
     	let entities
     	if (ctx.query._q) {
       		entities = await strapi.services.restaurant.search(ctx.query)
+      	} else if (ctx.query["coords"]) {
+      		let coords = ctx.query["coords"]
+      		ctx.query["coords"] = null
+      		entities = await strapi.services.restaurant.find(ctx.query)
     	} else {
       		entities = await strapi.services.restaurant.find(ctx.query)
     	}
 
-    	return entities.map(entity => { return mapRestaurant(entity, favorites) })
+    	return entities.map(entity => { return mapRestaurant(entity, ctx.state.user, userCoords, radioFilter) }).filter((i) => i)
   	}
 }
 
-function mapRestaurant(entity, favorites) {
+function mapRestaurant(entity, user, userCoords, radioFilter) {
 	
 	if (entity == null) {
 		return null
@@ -90,33 +98,24 @@ function mapRestaurant(entity, favorites) {
 
 	const restaurant = sanitizeEntity(entity, { model: strapi.models.restaurant })
 
-	// Remove expired menus
-	let newMenus = []
-	if (restaurant.menus) {
-		for (let i = 0; i < restaurant.menus.length; i++) {
-      		let menu = restaurant.menus[i]
+	// Remove expired menus and menus with less than 7 days
+	restaurant.menus = restaurant.menus.map(menu => {
+  		var currentDate = new Date()
+		currentDate.setDate(currentDate.getDate())
+		currentDate.setHours(0, 0, 0, 0)
 
-      		var currentDate = new Date()
-			currentDate.setDate(currentDate.getDate())
-			currentDate.setHours(0,0,0,0)
-
-			let menuDate = new Date(menu.date+'T00:00:00.000')
-			let days = Math.round((menuDate-currentDate)/(1000*60*60*24))
-			if (days >= 0) {
-				newMenus.push(menu)
-			}
+		let menuDate = new Date(menu.date+'T00:00:00.000')
+		let days = Math.round((menuDate-currentDate)/(1000*60*60*24))
+		if (days >= 0 && days < 7) {
+			return menu
 		}
-	}
-	restaurant.menus = newMenus
-	restaurant.is_favorite = false
+	}).filter((i) => i)
 
-	if (favorites) {
-		for (let i = 0; i < favorites.length; i++) {
-			let favorite = favorites[i]
-			if (restaurant.id == favorite.id) {
-				restaurant.is_favorite = true
-			}
-		}
+	// Check if is favorite for logged user
+	if (user && restaurant.users.findIndex(u => u.id === user.id) >= 0) {
+		restaurant.is_favorite = true
+	} else {
+		restaurant.is_favorite = false
 	}
 
 	// Remove all users from entity
@@ -124,21 +123,20 @@ function mapRestaurant(entity, favorites) {
 		delete restaurant.users
 	}
 
-	// Remove only X values from users
-	/*
-	if (restaurant.users) {
-		for (let step = 0; step < 1; step++) {
-			delete restaurant.users[step].email
-  			delete restaurant.users[step].username
-  			delete restaurant.users[step].provider
-  			delete restaurant.users[step].confirmed
-  			delete restaurant.users[step].blocked
-  			delete restaurant.users[step].role
-  			delete restaurant.users[step].created_at
-  			delete restaurant.users[step].updated_at
-		}
+	// Remove all owners from entity
+	if (restaurant.owners) {
+		delete restaurant.owners
 	}
-	*/
+
+	// Calculate distance
+	if (userCoords && restaurant.latitude && restaurant.longitude) {
+		restaurant.distance = geolib.getDistance({ latitude: userCoords.latitude, longitude: userCoords.longitude }, { latitude: restaurant.latitude, longitude: restaurant.longitude })
+	}
+
+	// Filter by distance radio
+	if (restaurant.distance && radioFilter && radioFilter <= restaurant.distance) {
+		return null
+	}
 
 	return restaurant
 }

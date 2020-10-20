@@ -516,7 +516,10 @@
     "schemas": {
       "Restaurant": {
         "required": [
-          "id"
+          "id",
+          "name",
+          "latitude",
+          "longitude"
         ],
         "properties": {
           "id": {
@@ -545,6 +548,95 @@
           },
           "phone": {
             "type": "string"
+          },
+          "menus": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "price"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "name": {
+                  "type": "string"
+                },
+                "price": {
+                  "type": "number"
+                },
+                "date": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "sections": {
+                  "type": "object"
+                },
+                "is_bread_included": {
+                  "type": "boolean"
+                },
+                "is_drink_included": {
+                  "type": "boolean"
+                },
+                "is_desert_included": {
+                  "type": "boolean"
+                }
+              }
+            }
+          },
+          "owners": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "username",
+                "email"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "username": {
+                  "type": "string"
+                },
+                "email": {
+                  "type": "string"
+                },
+                "provider": {
+                  "type": "string"
+                },
+                "password": {
+                  "type": "string"
+                },
+                "resetPasswordToken": {
+                  "type": "string"
+                },
+                "confirmed": {
+                  "type": "boolean"
+                },
+                "blocked": {
+                  "type": "boolean"
+                },
+                "role": {
+                  "type": "string"
+                },
+                "restaurants": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "favorites": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
           },
           "users": {
             "type": "array",
@@ -589,54 +681,22 @@
                   }
                 },
                 "favorites": {
-                  "type": "string"
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }
-          },
-          "menus": {
-            "type": "array",
-            "items": {
-              "required": [
-                "id"
-              ],
-              "properties": {
-                "id": {
-                  "type": "string"
-                },
-                "name": {
-                  "type": "string"
-                },
-                "price": {
-                  "type": "number"
-                },
-                "date": {
-                  "type": "string"
-                },
-                "restaurant": {
-                  "type": "string"
-                },
-                "sections": {
-                  "type": "object"
-                },
-                "is_bread_included": {
-                  "type": "boolean"
-                },
-                "is_drink_included": {
-                  "type": "boolean"
-                },
-                "is_desert_included": {
-                  "type": "boolean"
-                }
-              }
-            }
-          },
-          "is_favorite": {
-            "type": "boolean"
           }
         }
       },
       "NewRestaurant": {
+        "required": [
+          "name",
+          "latitude",
+          "longitude"
+        ],
         "properties": {
           "name": {
             "type": "string"
@@ -662,20 +722,23 @@
           "phone": {
             "type": "string"
           },
-          "users": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
           "menus": {
             "type": "array",
             "items": {
               "type": "string"
             }
           },
-          "is_favorite": {
-            "type": "boolean"
+          "owners": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "users": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
