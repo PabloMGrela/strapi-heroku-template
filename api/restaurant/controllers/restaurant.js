@@ -118,6 +118,13 @@ function mapRestaurant(entity, user, userCoords, radioFilter) {
 		restaurant.is_favorite = false
 	}
 
+	// Check if the logged user is owner
+	if (user && restaurant.owners.findIndex(u => u.id === user.id) >= 0) {
+		restaurant.is_mine = true
+	} else {
+		restaurant.is_mine = false
+	}
+
 	// Remove all users from entity
 	if (restaurant.users) {
 		delete restaurant.users
