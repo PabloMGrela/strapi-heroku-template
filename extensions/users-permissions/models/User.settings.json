@@ -61,6 +61,10 @@
       "via": "users",
       "collection": "restaurant",
       "dominant": true
+    },
+    "rates": {
+      "via": "user",
+      "collection": "rate"
     }
   }
 }

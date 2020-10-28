@@ -21,15 +21,6 @@
       "type": "float",
       "required": true
     },
-    "rating": {
-      "type": "float"
-    },
-    "logo": {
-      "type": "string"
-    },
-    "image": {
-      "type": "string"
-    },
     "address": {
       "type": "string"
     },
@@ -37,8 +28,8 @@
       "type": "string"
     },
     "menus": {
-      "via": "restaurant",
-      "collection": "menu"
+      "collection": "menu",
+      "via": "restaurant"
     },
     "owners": {
       "plugin": "users-permissions",
@@ -50,6 +41,32 @@
       "plugin": "users-permissions",
       "collection": "user",
       "via": "favorites"
+    },
+    "header_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "logo_image": {
+      "model": "file",
+      "via": "related",
+      "allowedTypes": [
+        "images",
+        "files",
+        "videos"
+      ],
+      "plugin": "upload",
+      "required": false
+    },
+    "rates": {
+      "collection": "rate",
+      "via": "restaurant"
     }
   }
 }

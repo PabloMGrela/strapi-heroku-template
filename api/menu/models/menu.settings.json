@@ -20,20 +20,23 @@
       "type": "date"
     },
     "restaurant": {
-      "model": "restaurant",
-      "via": "menus"
+      "via": "menus",
+      "model": "restaurant"
     },
     "sections": {
       "type": "json"
     },
     "is_bread_included": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "is_drink_included": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     },
     "is_desert_included": {
-      "type": "boolean"
+      "type": "boolean",
+      "default": false
     }
   }
 }

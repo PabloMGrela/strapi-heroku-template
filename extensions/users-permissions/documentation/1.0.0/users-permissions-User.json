@@ -1267,15 +1267,6 @@
                 "longitude": {
                   "type": "number"
                 },
-                "rating": {
-                  "type": "number"
-                },
-                "logo": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string"
-                },
                 "address": {
                   "type": "string"
                 },
@@ -1295,6 +1286,18 @@
                   }
                 },
                 "users": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                },
+                "header_image": {
+                  "type": "string"
+                },
+                "logo_image": {
+                  "type": "string"
+                },
+                "rates": {
                   "type": "array",
                   "items": {
                     "type": "string"
@@ -1325,15 +1328,6 @@
                 "longitude": {
                   "type": "number"
                 },
-                "rating": {
-                  "type": "number"
-                },
-                "logo": {
-                  "type": "string"
-                },
-                "image": {
-                  "type": "string"
-                },
                 "address": {
                   "type": "string"
                 },
@@ -1357,6 +1351,44 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "header_image": {
+                  "type": "string"
+                },
+                "logo_image": {
+                  "type": "string"
+                },
+                "rates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "rates": {
+            "type": "array",
+            "items": {
+              "required": [
+                "id",
+                "value"
+              ],
+              "properties": {
+                "id": {
+                  "type": "string"
+                },
+                "user": {
+                  "type": "string"
+                },
+                "restaurant": {
+                  "type": "string"
+                },
+                "value": {
+                  "type": "integer"
+                },
+                "comment": {
+                  "type": "string"
                 }
               }
             }
@@ -1405,6 +1437,12 @@
             }
           },
           "favorites": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "rates": {
             "type": "array",
             "items": {
               "type": "string"

@@ -1,0 +1,30 @@
+{
+  "kind": "collectionType",
+  "collectionName": "rates",
+  "info": {
+    "name": "Rate"
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true
+  },
+  "attributes": {
+    "user": {
+      "plugin": "users-permissions",
+      "model": "user",
+      "via": "rates"
+    },
+    "restaurant": {
+      "via": "rates",
+      "model": "restaurant"
+    },
+    "value": {
+      "type": "integer",
+      "default": 0,
+      "required": true
+    },
+    "comment": {
+      "type": "text"
+    }
+  }
+}

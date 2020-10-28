@@ -111,6 +111,12 @@ function mapRestaurant(entity, user, userCoords, radioFilter) {
 		}
 	}).filter((i) => i)
 
+	var sum = 0
+	restaurant.rates.forEach(rate => {
+		sum = sum + rate.value
+	})
+	restaurant.rating = sum/restaurant.rates.length
+
 	// Check if is favorite for logged user
 	if (user && restaurant.users.findIndex(u => u.id === user.id) >= 0) {
 		restaurant.is_favorite = true

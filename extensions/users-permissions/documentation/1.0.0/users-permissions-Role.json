@@ -620,6 +620,12 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "rates": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
                 }
               }
             }

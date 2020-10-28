@@ -1,6 +1,6 @@
 {
   "paths": {
-    "/menus": {
+    "/rates": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -12,7 +12,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/Menu"
+                    "$ref": "#/components/schemas/Rate"
                   }
                 }
               }
@@ -51,7 +51,7 @@
         },
         "summary": "",
         "tags": [
-          "Menu"
+          "Rate"
         ],
         "parameters": [
           {
@@ -201,7 +201,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Menu"
+                  "$ref": "#/components/schemas/Rate"
                 }
               }
             }
@@ -239,7 +239,7 @@
         },
         "summary": "",
         "tags": [
-          "Menu"
+          "Rate"
         ],
         "requestBody": {
           "description": "",
@@ -247,14 +247,14 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMenu"
+                "$ref": "#/components/schemas/NewRate"
               }
             }
           }
         }
       }
     },
-    "/menus/count": {
+    "/rates/count": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -306,12 +306,12 @@
         },
         "summary": "",
         "tags": [
-          "Menu"
+          "Rate"
         ],
         "parameters": []
       }
     },
-    "/menus/{id}": {
+    "/rates/{id}": {
       "get": {
         "deprecated": false,
         "description": "",
@@ -321,7 +321,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Menu"
+                  "$ref": "#/components/schemas/Rate"
                 }
               }
             }
@@ -359,7 +359,7 @@
         },
         "summary": "",
         "tags": [
-          "Menu"
+          "Rate"
         ],
         "parameters": [
           {
@@ -383,7 +383,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/Menu"
+                  "$ref": "#/components/schemas/Rate"
                 }
               }
             }
@@ -421,7 +421,7 @@
         },
         "summary": "",
         "tags": [
-          "Menu"
+          "Rate"
         ],
         "requestBody": {
           "description": "",
@@ -429,7 +429,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/NewMenu"
+                "$ref": "#/components/schemas/NewRate"
               }
             }
           }
@@ -495,7 +495,7 @@
         },
         "summary": "",
         "tags": [
-          "Menu"
+          "Rate"
         ],
         "parameters": [
           {
@@ -514,23 +514,68 @@
   },
   "components": {
     "schemas": {
-      "Menu": {
+      "Rate": {
         "required": [
           "id",
-          "price"
+          "value"
         ],
         "properties": {
           "id": {
             "type": "string"
           },
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number"
-          },
-          "date": {
-            "type": "string"
+          "user": {
+            "required": [
+              "id",
+              "username",
+              "email"
+            ],
+            "properties": {
+              "id": {
+                "type": "string"
+              },
+              "username": {
+                "type": "string"
+              },
+              "email": {
+                "type": "string"
+              },
+              "provider": {
+                "type": "string"
+              },
+              "password": {
+                "type": "string"
+              },
+              "resetPasswordToken": {
+                "type": "string"
+              },
+              "confirmed": {
+                "type": "boolean"
+              },
+              "blocked": {
+                "type": "boolean"
+              },
+              "role": {
+                "type": "string"
+              },
+              "restaurants": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "favorites": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              },
+              "rates": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
           },
           "restaurant": {
             "required": [
@@ -590,54 +635,32 @@
               }
             }
           },
-          "sections": {
-            "type": "object"
+          "value": {
+            "type": "integer",
+            "default": 0
           },
-          "is_bread_included": {
-            "type": "boolean",
-            "default": false
-          },
-          "is_drink_included": {
-            "type": "boolean",
-            "default": false
-          },
-          "is_desert_included": {
-            "type": "boolean",
-            "default": false
+          "comment": {
+            "type": "string"
           }
         }
       },
-      "NewMenu": {
+      "NewRate": {
         "required": [
-          "price"
+          "value"
         ],
         "properties": {
-          "name": {
-            "type": "string"
-          },
-          "price": {
-            "type": "number"
-          },
-          "date": {
+          "user": {
             "type": "string"
           },
           "restaurant": {
             "type": "string"
           },
-          "sections": {
-            "type": "object"
+          "value": {
+            "type": "integer",
+            "default": 0
           },
-          "is_bread_included": {
-            "type": "boolean",
-            "default": false
-          },
-          "is_drink_included": {
-            "type": "boolean",
-            "default": false
-          },
-          "is_desert_included": {
-            "type": "boolean",
-            "default": false
+          "comment": {
+            "type": "string"
           }
         }
       }
@@ -645,7 +668,7 @@
   },
   "tags": [
     {
-      "name": "Menu"
+      "name": "Rate"
     }
   ]
 }
