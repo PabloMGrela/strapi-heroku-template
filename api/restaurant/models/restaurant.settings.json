@@ -2,11 +2,13 @@
   "kind": "collectionType",
   "collectionName": "restaurants",
   "info": {
-    "name": "Restaurant"
+    "name": "Restaurant",
+    "description": ""
   },
   "options": {
     "increments": true,
-    "timestamps": true
+    "timestamps": true,
+    "draftAndPublish": false
   },
   "attributes": {
     "name": {
@@ -67,6 +69,11 @@
     "rates": {
       "collection": "rate",
       "via": "restaurant"
+    },
+    "is_active": {
+      "type": "boolean",
+      "default": false,
+      "required": true
     }
   }
 }

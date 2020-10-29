@@ -14,7 +14,7 @@
       "name": "Apache 2.0",
       "url": "https://www.apache.org/licenses/LICENSE-2.0.html"
     },
-    "x-generation-date": "10/29/2020 2:42:25 PM"
+    "x-generation-date": "10/29/2020 4:02:25 PM"
   },
   "x-strapi-config": {
     "path": "/documentation",
@@ -3703,7 +3703,8 @@
               "id",
               "name",
               "latitude",
-              "longitude"
+              "longitude",
+              "is_active"
             ],
             "properties": {
               "id": {
@@ -3753,6 +3754,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "is_active": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
@@ -3894,7 +3898,8 @@
               "id",
               "name",
               "latitude",
-              "longitude"
+              "longitude",
+              "is_active"
             ],
             "properties": {
               "id": {
@@ -3945,6 +3950,9 @@
                   "type": "string"
                 }
               },
+              "is_active": {
+                "type": "boolean"
+              },
               "created_by": {
                 "type": "string"
               },
@@ -3993,7 +4001,8 @@
           "id",
           "name",
           "latitude",
-          "longitude"
+          "longitude",
+          "is_active"
         ],
         "properties": {
           "id": {
@@ -4349,6 +4358,10 @@
                 }
               }
             }
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -4356,7 +4369,8 @@
         "required": [
           "name",
           "latitude",
-          "longitude"
+          "longitude",
+          "is_active"
         ],
         "properties": {
           "name": {
@@ -4397,6 +4411,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"
@@ -4640,7 +4658,8 @@
                 "id",
                 "name",
                 "latitude",
-                "longitude"
+                "longitude",
+                "is_active"
               ],
               "properties": {
                 "id": {
@@ -4690,6 +4709,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "is_active": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"
@@ -4707,7 +4729,8 @@
                 "id",
                 "name",
                 "latitude",
-                "longitude"
+                "longitude",
+                "is_active"
               ],
               "properties": {
                 "id": {
@@ -4757,6 +4780,9 @@
                   "items": {
                     "type": "string"
                   }
+                },
+                "is_active": {
+                  "type": "boolean"
                 },
                 "created_by": {
                   "type": "string"

@@ -519,7 +519,8 @@
           "id",
           "name",
           "latitude",
-          "longitude"
+          "longitude",
+          "is_active"
         ],
         "properties": {
           "id": {
@@ -875,6 +876,10 @@
                 }
               }
             }
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": false
           }
         }
       },
@@ -882,7 +887,8 @@
         "required": [
           "name",
           "latitude",
-          "longitude"
+          "longitude",
+          "is_active"
         ],
         "properties": {
           "name": {
@@ -923,6 +929,10 @@
             "items": {
               "type": "string"
             }
+          },
+          "is_active": {
+            "type": "boolean",
+            "default": false
           },
           "created_by": {
             "type": "string"

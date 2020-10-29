@@ -588,7 +588,8 @@
               "id",
               "name",
               "latitude",
-              "longitude"
+              "longitude",
+              "is_active"
             ],
             "properties": {
               "id": {
@@ -638,6 +639,9 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "is_active": {
+                "type": "boolean"
               },
               "created_by": {
                 "type": "string"
