@@ -73,7 +73,7 @@
     "is_active": {
       "type": "boolean",
       "default": false,
-      "required": true
+      "required": false
     }
   }
 }

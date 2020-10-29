@@ -519,8 +519,7 @@
           "id",
           "name",
           "latitude",
-          "longitude",
-          "is_active"
+          "longitude"
         ],
         "properties": {
           "id": {
@@ -887,8 +886,7 @@
         "required": [
           "name",
           "latitude",
-          "longitude",
-          "is_active"
+          "longitude"
         ],
         "properties": {
           "name": {
