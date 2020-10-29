@@ -111,3 +111,4 @@ exports
 .cache
 build
 package-lock.json
+.env
