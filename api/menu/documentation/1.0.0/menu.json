@@ -530,7 +530,8 @@
             "type": "number"
           },
           "date": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "restaurant": {
             "required": [
@@ -587,6 +588,12 @@
                 "items": {
                   "type": "string"
                 }
+              },
+              "created_by": {
+                "type": "string"
+              },
+              "updated_by": {
+                "type": "string"
               }
             }
           },
@@ -619,7 +626,8 @@
             "type": "number"
           },
           "date": {
-            "type": "string"
+            "type": "string",
+            "format": "date"
           },
           "restaurant": {
             "type": "string"
@@ -638,6 +646,12 @@
           "is_desert_included": {
             "type": "boolean",
             "default": false
+          },
+          "created_by": {
+            "type": "string"
+          },
+          "updated_by": {
+            "type": "string"
           }
         }
       }
