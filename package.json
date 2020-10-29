@@ -27,6 +27,7 @@
     "strapi-plugin-email": "^3.0.0",
     "strapi-plugin-upload": "^3.2.5",
     "strapi-plugin-users-permissions": "^3.0.0",
+    "strapi-provider-upload-cloudinary": "^3.2.5",
     "strapi-utils": "^3.0.0"
   },
   "author": {
