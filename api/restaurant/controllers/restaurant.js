@@ -54,7 +54,7 @@ module.exports = {
     	} else {
 
     		const entity = await strapi.services.restaurant.findOne({ id });
-    		return mapRestaurant(entity, favorites, userCoords, radioFilter);
+    		return mapRestaurant(entity, ctx.state.user, userCoords, radioFilter);
 		}
   	},
 
