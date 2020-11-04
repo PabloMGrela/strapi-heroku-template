@@ -98,25 +98,6 @@ function mapRestaurant(entity, user, userCoords, radioFilter) {
 
 	const restaurant = sanitizeEntity(entity, { model: strapi.models.restaurant })
 
-	// Remove expired menus and menus with less than 7 days
-	restaurant.menus = restaurant.menus.map(menu => {
-  		var currentDate = new Date()
-		currentDate.setDate(currentDate.getDate())
-		currentDate.setHours(0, 0, 0, 0)
-
-		let menuDate = new Date(menu.date+'T00:00:00.000')
-		let days = Math.round((menuDate-currentDate)/(1000*60*60*24))
-		if (days >= 0 && days < 7) {
-			return menu
-		}
-	}).filter((i) => i)
-
-	var sum = 0
-	restaurant.rates.forEach(rate => {
-		sum = sum + rate.value
-	})
-	restaurant.rating = sum/restaurant.rates.length
-
 	// Check if is favorite for logged user
 	if (user && restaurant.users.findIndex(u => u.id === user.id) >= 0) {
 		restaurant.is_favorite = true
@@ -150,6 +131,27 @@ function mapRestaurant(entity, user, userCoords, radioFilter) {
 	if (restaurant.distance && radioFilter && radioFilter <= restaurant.distance) {
 		return null
 	}
+
+	// Remove expired menus and menus with less than 7 days
+	restaurant.menus = restaurant.menus.map(menu => {
+  		var currentDate = new Date()
+		currentDate.setDate(currentDate.getDate())
+		currentDate.setHours(0, 0, 0, 0)
+
+		let menuDate = new Date(menu.date+'T00:00:00.000')
+		let days = Math.round((menuDate-currentDate)/(1000*60*60*24))
+		if (days >= 0 && days < 7) {
+			return menu
+		} else if (restaurant.is_mine) {
+			return menu
+		}
+	}).filter((i) => i)
+
+	var sum = 0
+	restaurant.rates.forEach(rate => {
+		sum = sum + rate.value
+	})
+	restaurant.rating = sum/restaurant.rates.length
 
 	return restaurant
 }
