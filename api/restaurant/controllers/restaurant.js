@@ -114,7 +114,7 @@ function mapRestaurant(entity, user, userCoords, radioFilter) {
 
 	// Ignore if its disabled and not mine
 	if (!restaurant.is_active && !restaurant.is_mine) {
-		return nil
+		return null
 	}
 
 	// Remove all users from entity
